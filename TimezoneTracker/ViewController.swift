@@ -33,6 +33,25 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    class Time {
+        var year: String
+        var month: String
+        var day: String
+        var hour: String
+        var minute: String
+        var dayOfWeek: String
+        
+        init(date: String) {
+            let arrDate = date.components(separatedBy: ",")
+            self.year = arrDate[0]
+            self.month = arrDate[1]
+            self.day = arrDate[2]
+            self.hour = arrDate[3]
+            self.minute = arrDate[4]
+            self.dayOfWeek = arrDate[5]
+        }
+    }
+    
     func calWeekNumber(week: String) -> Int {
         if week == "Monday" {
             return 1
