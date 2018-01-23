@@ -39,6 +39,7 @@ class ViewController: UIViewController {
         var day: String
         var hour: String
         var minute: String
+        var second: String
         var dayOfWeek: String
         
         init(date: String) {
@@ -48,7 +49,20 @@ class ViewController: UIViewController {
             self.day = arrDate[2]
             self.hour = arrDate[3]
             self.minute = arrDate[4]
-            self.dayOfWeek = arrDate[5]
+            self.second = arrDate[5]
+            self.dayOfWeek = arrDate[6]
+        }
+        
+        func getDate() -> String {
+            return self.month + "月" + self.day + "日"
+        }
+        
+        func getTime() -> String {
+            return self.hour + ":" + self.minute + ":" + self.second
+        }
+        
+        func getDayOfWeek() -> String {
+            return self.dayOfWeek
         }
     }
     
@@ -81,25 +95,21 @@ class ViewController: UIViewController {
         let currentDate = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "PDT")
-        dateFormatter.dateFormat = "MM月dd日"
-        date1.text = dateFormatter.string(from: currentDate)
-        dateFormatter.dateFormat = "HH:mm:ss"
-        time1.text = dateFormatter.string(from: currentDate)
-        dateFormatter.dateFormat = "EEEE"
-        let dayOfWeek1 = dateFormatter.string(from: currentDate)
-        week1.text = dayOfWeek1
+        dateFormatter.dateFormat = "YYYY,MM,dd,HH,mm,ss,EEEE"
+        let timeClassA = Time(date: dateFormatter.string(from: currentDate))
+        date1.text = timeClassA.getDate()
+        time1.text = timeClassA.getTime()
+        week1.text = timeClassA.getDayOfWeek()
+        
         dateFormatter.timeZone = TimeZone(abbreviation: "HKT")
-        dateFormatter.dateFormat = "MM月dd日"
-        date2.text = dateFormatter.string(from: currentDate)
-        dateFormatter.dateFormat = "HH:mm:ss"
-        time2.text = dateFormatter.string(from: currentDate)
-        dateFormatter.dateFormat = "EEEE"
-        let dayOfWeek2 = dateFormatter.string(from: currentDate)
-        week2.text = dayOfWeek2
+        let timeClassB = Time(date: dateFormatter.string(from: currentDate))
+        date2.text = timeClassB.getDate()
+        time2.text = timeClassB.getTime()
+        week2.text = timeClassB.getDayOfWeek()
     }
 
     //MARK: Actions
-    @IBAction func setLabelRefresh(_ sender: UIButton) {
+    @IBAction func setLabelRefresh(sender: UIButton) {
                 
     }
 }
